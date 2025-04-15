@@ -1,12 +1,10 @@
 const express = require('express');
 const Admin = require('../models/Admin');
-const Student = require('../models/Student');
-const Teacher = require('../models/Teacher');
 const router = express.Router();
 const { body, validationResult } = require('express-validator');
 
 
-//Create a User using POST "/api/Authentication/createAdmin" .No login required
+//Create a User using POST "/api/Admin/createAdmin" .No login required
 router.post('/createAdmin',[
     body('firstName','Enter a valid name').isLength({min: 3}),
     body('lastName','Enter a valid last name').isLength({min: 3}),
@@ -41,7 +39,5 @@ router.post('/createAdmin',[
     res.status(500).send("some error occur")
   }
   });
-
-
 
   module.exports = router

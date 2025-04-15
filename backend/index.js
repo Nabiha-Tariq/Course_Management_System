@@ -7,7 +7,15 @@ connectToMongo();
 
 app.use(express.json())  // if you use request body
 
-app.use('/api/Authentication', require('./routes/Authentication'))
+const Studentroutes = require('./routes/Student'); 
+const Teacherroutes = require('./routes/Teacher'); 
+const Adminroutes = require('./routes/Admin'); 
+
+
+app.use('/api/Student',Studentroutes)
+app.use('/api/Teacher',Teacherroutes)
+app.use('/api/Admin',Adminroutes)
+
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
