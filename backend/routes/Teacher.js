@@ -39,4 +39,13 @@ router.post('/createTeacher',[
   }
   });
   
+  router.get('/createTeacher', async (req, res) => {
+    try {
+      const teacher = await Teacher.find();
+      res.json(teacher);
+    } catch (err) {
+      res.status(500).json({ error: 'Error fetching teacher' });
+    }
+  });
+
   module.exports = router
