@@ -7,7 +7,10 @@ import AddStudent from './components/AddStudent';
 import EditStudent from './components/EditStudent';
 import DeleteStudent from './components/DeleteStudent';
 import ViewStudent from './components/ViewStudent';
-
+import AddTeacher from './components/AddTeacher';
+import EditTeacher from './components/EditTeacher';
+import DeleteTeacher from './components/DeleteTeacher';
+import ViewTeacher from './components/ViewTeacher';
 
 function App() {
   return (
@@ -20,9 +23,10 @@ function App() {
         <Route path="/student/delete-student/:studentid" element={<DeleteStudent/>}/>
 
         <Route path="/teacher" element={<Teacher/>} />
-        <Route path="/add-student" element={<AddStudent/>}/>
-        <Route path="/edit-student" element={<EditStudent/>}/>
-        <Route path="/delete-student" element={<DeleteStudent/>}/>
+        <Route path="/teacher/add-teacher" element={<AddTeacher/>}/>
+        <Route path="/teacher/view-teacher/:teacherid" element={<ViewTeacher/>}/>
+        <Route path="/teacher/edit-teacher/:teacherid" element={<EditTeacher/>}/>
+        <Route path="/teacher/delete-teacher/:teacherid" element={<DeleteTeacher/>}/>
 
 
 

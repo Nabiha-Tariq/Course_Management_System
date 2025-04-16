@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
-//import AddTeacher from '../components/AddTeacher';
-//import EditTeacher from '../components/EditTeacher';
 import './Globalpage.css';
-import { TeacherApi } from '../service/TeacherApi';
+import { teacherApi } from '../service/TeacherApi';
+import { useNavigate } from 'react-router-dom';
 
 const Teacher = () => {
   const [teacherData ,setteacherData]=useState();
+  const navigate =useNavigate()
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const data = await TeacherApi(); // Call the correct fetch function
+        const data = await teacherApi(); // Call the correct fetch function
         setteacherData(data)
       } catch (error) {
         console.error("Error fetching teacher:", error);
@@ -18,11 +18,15 @@ const Teacher = () => {
     }
     fetchData();
   }, []);
+  
+  function handlebtn(){
+    navigate('/teacher/add-teacher')
+  }
   return (
     <div className="form">
       <div className="record-box">
         <h1 className="heading">Teacher Data</h1>
-        <button class="add-btn">Add New Teacher</button>
+        <button class="add-btn"  onClick={handlebtn}>Add New Teacher</button>
 
         <table>
           <thead>
@@ -39,15 +43,15 @@ const Teacher = () => {
             {Array.isArray(teacherData) && teacherData.map((teacher, index)=>{
                return(
                  <tr>
-                 <td>{index}</td>
+                 <td>{index+1}</td>
                  <td>{teacher.firstName}</td>
                  <td>{teacher.lastName}</td>
                  <td>{teacher.email}</td>
                  <td>{teacher.status}</td>
                  <td>
-                   <button class="action-btn view-btn">View</button>
-                   <button class="action-btn edit-btn">Edit</button>
-                   <button class="action-btn delete-btn">Delete</button>
+                   <button class="action-btn view-btn" onClick={() => navigate(`/teacher/view-teacher/${teacher._id}`)}>View</button>
+                   <button class="action-btn edit-btn" onClick={() => navigate(`/teacher/edit-teacher/${teacher._id}`)}>Edit</button>
+                   <button class="action-btn delete-btn" onClick={() => navigate(`/teacher/delete-teacher/${teacher._id}`)}>Delete</button>
                  </td>
                  </tr>
                )
