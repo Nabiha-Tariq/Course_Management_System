@@ -3,6 +3,7 @@ import './App.css';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 import Student from './pages/Student';
 import Teacher from './pages/Teacher';
+import Course from './pages/Course';
 import AddStudent from './components/AddStudent';
 import EditStudent from './components/EditStudent';
 import DeleteStudent from './components/DeleteStudent';
@@ -11,6 +12,10 @@ import AddTeacher from './components/AddTeacher';
 import EditTeacher from './components/EditTeacher';
 import DeleteTeacher from './components/DeleteTeacher';
 import ViewTeacher from './components/ViewTeacher';
+import AddCourse from './components/AddCourse';
+import EditCourse from './components/EditCourse';
+import ViewCourse from './components/ViewCourse';
+import DeleteCourse from './components/DeleteCourse';
 
 function App() {
   return (
@@ -27,6 +32,12 @@ function App() {
         <Route path="/teacher/view-teacher/:teacherid" element={<ViewTeacher/>}/>
         <Route path="/teacher/edit-teacher/:teacherid" element={<EditTeacher/>}/>
         <Route path="/teacher/delete-teacher/:teacherid" element={<DeleteTeacher/>}/>
+
+        <Route path='/course' element={<Course/>}/>
+        <Route path="/course/add-course" element={<AddCourse/>}/>
+        <Route path="/course/view-course/:courseid" element={<ViewCourse/>}/>
+        <Route path="/course/edit-course/:courseid" element={<EditCourse/>}/>
+        <Route path="/course/delete-course/:courseid" element={<DeleteCourse/>}/>
 
 
 

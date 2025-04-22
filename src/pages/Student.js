@@ -6,6 +6,8 @@ import './Globalpage.css';
 const Student = () => {
   const navigate= useNavigate();
   const [studentData ,setstudentData]=useState();
+  const [filteredData, setFilteredData] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     async function fetchData() {
@@ -13,18 +15,38 @@ const Student = () => {
       const dataArray = Array.isArray(data) ? data : [data];
       console.log(dataArray)
       setstudentData(data);
+      setFilteredData(dataArray);
     }
     fetchData();
   }, []);
 
+
   function handlebtn(){
     navigate('/student/add-student')
+  }
+  
+  function handleSearchChange(e) {
+    const value = e.target.value.toLowerCase();
+    setSearchTerm(value);
+    const filtered = studentData.filter(student =>
+      student.firstName.toLowerCase().includes(value) ||
+      student.lastName.toLowerCase().includes(value)
+    );
+    setFilteredData(filtered);
   }
   
   return (
     <div className="form">
       <div className="record-box">
         <h1 className="heading">Student Data</h1>
+        <input
+          type="text"
+          className="search_input"
+          placeholder="Search by name"
+          value={searchTerm}
+          onChange={handleSearchChange}
+        />
+
         <button class="add-btn" onClick={handlebtn}>Add New Student</button>
 
         <table>
@@ -39,7 +61,7 @@ const Student = () => {
             </tr>
           </thead>
             <tbody>
-            {Array.isArray(studentData) && studentData.map((student, index)=>{
+            {Array.isArray(filteredData) && filteredData.map((student, index)=>{
                return(
                  <tr>
                  <td>{index+1}</td>

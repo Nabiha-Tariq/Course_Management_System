@@ -5,6 +5,9 @@ import { useNavigate } from 'react-router-dom';
 
 const Teacher = () => {
   const [teacherData ,setteacherData]=useState();
+  const [filteredData, setFilteredData] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
+
   const navigate =useNavigate()
 
   useEffect(() => {
@@ -12,6 +15,7 @@ const Teacher = () => {
       try {
         const data = await teacherApi(); // Call the correct fetch function
         setteacherData(data)
+        setFilteredData(data);
       } catch (error) {
         console.error("Error fetching teacher:", error);
       }
@@ -22,10 +26,29 @@ const Teacher = () => {
   function handlebtn(){
     navigate('/teacher/add-teacher')
   }
+
+  function handleSearchChange(e) {
+    const value = e.target.value.toLowerCase();
+    setSearchTerm(value);
+    const filtered = teacherData.filter(teacher =>
+      teacher.firstName.toLowerCase().includes(value) ||
+      teacher.lastName.toLowerCase().includes(value)
+    );
+    setFilteredData(filtered);
+  }
+
   return (
     <div className="form">
       <div className="record-box">
         <h1 className="heading">Teacher Data</h1>
+        <input
+          type="text"
+          className="search_input"
+          placeholder="Search by name"
+          value={searchTerm}
+          onChange={handleSearchChange}
+        />
+
         <button class="add-btn"  onClick={handlebtn}>Add New Teacher</button>
 
         <table>
@@ -40,7 +63,7 @@ const Teacher = () => {
             </tr>
           </thead>
             <tbody>
-            {Array.isArray(teacherData) && teacherData.map((teacher, index)=>{
+            {Array.isArray(filteredData) && filteredData.map((teacher, index)=>{
                return(
                  <tr>
                  <td>{index+1}</td>
