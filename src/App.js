@@ -19,6 +19,8 @@ import DeleteCourse from './components/DeleteCourse';
 import Loginsignup from './pages/Loginsignup';
 import Studentlogin from './components/Studentlogin';
 import Teacherlogin from './components/Teacherlogin';
+import Studenthome from './pages/Studenthome';
+import Teacherhome from './pages/Teacherhome';
 
 
 function App() {
@@ -28,8 +30,10 @@ function App() {
         <Route path="/login" element={<Loginsignup/>}/>
         <Route path="/login/studentlogin" element={<Studentlogin/>}/>
         <Route path="/login/teacherlogin" element={<Teacherlogin/>}/>
-
-
+        
+        <Route path="/studenthome" element={<Studenthome/>}/>
+        <Route path="/teacherhome" element={<Teacherhome/>}/>
+        
 
         <Route path="/student" element={<Student />} />
         <Route path="/student/add-student" element={<AddStudent/>}/>

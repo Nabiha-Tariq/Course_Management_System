@@ -1,0 +1,50 @@
+/* Page container */
+.profile-container {
+    font-family: Arial, sans-serif;
+    background-color: #f3f4f6;
+    min-height: 100vh;
+  }
+  
+  /* Navbar */
+  .navbar {
+    background-color: #9c27b0; /* purple */
+    color: white;
+    padding: 1rem 2rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Card layout */
+  .card-container {
+    display: flex;
+    gap: 20px;
+    padding: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  /* Cards */
+  .card {
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+  }
+  
+  .personal-card h3,
+  .academic-card h3 {
+    color: #9c27b0;
+    margin-bottom: 1rem;
+  }
+  
+  .academic-card ul {
+    list-style-type: square;
+    padding-left: 20px;
+  }
+  
+  .academic-card li {
+    margin-bottom: 0.5rem;
+  }
+  

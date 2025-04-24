@@ -6,8 +6,6 @@ import '../pages/loginsignup.css';
 import { useNavigate } from "react-router-dom";
 import {teacherApi} from '../service/TeacherApi'
  
-
-
 const Teacherlogin = () => {
   const navigate =useNavigate()
   const [loginTeacher , setLoginTeacher]= useState({
@@ -46,7 +44,7 @@ const Teacherlogin = () => {
           alert("Teacher is not active");
           return;
         }
-        navigate('/teacher');
+        navigate('/teacherhome',{state:matchedTeacher});
       } else {
         alert("Invalid email or password");
       }
