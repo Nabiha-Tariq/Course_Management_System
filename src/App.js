@@ -16,11 +16,21 @@ import AddCourse from './components/AddCourse';
 import EditCourse from './components/EditCourse';
 import ViewCourse from './components/ViewCourse';
 import DeleteCourse from './components/DeleteCourse';
+import Loginsignup from './pages/Loginsignup';
+import Studentlogin from './components/Studentlogin';
+import Teacherlogin from './components/Teacherlogin';
+
 
 function App() {
   return (
     <Router>
       <Routes>
+        <Route path="/login" element={<Loginsignup/>}/>
+        <Route path="/login/studentlogin" element={<Studentlogin/>}/>
+        <Route path="/login/teacherlogin" element={<Teacherlogin/>}/>
+
+
+
         <Route path="/student" element={<Student />} />
         <Route path="/student/add-student" element={<AddStudent/>}/>
         <Route path="/student/view-student/:studentid" element={<ViewStudent/>}/>
@@ -38,9 +48,6 @@ function App() {
         <Route path="/course/view-course/:courseid" element={<ViewCourse/>}/>
         <Route path="/course/edit-course/:courseid" element={<EditCourse/>}/>
         <Route path="/course/delete-course/:courseid" element={<DeleteCourse/>}/>
-
-
-
       </Routes>
     </Router>
    
