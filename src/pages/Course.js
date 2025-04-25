@@ -8,6 +8,17 @@ const Course = () => {
   const [courseData, setCourseData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const [checkingAccess, setCheckingAccess] = useState(true);
+
+   useEffect(() => {
+      const admin = localStorage.getItem("admin");
+      if (!admin) {
+        alert("You can't access this page")
+        navigate('/login');
+      }else {
+        setCheckingAccess(false);
+      }
+    }, [navigate]);
 
   useEffect(() => {
     async function fetchData() {
@@ -19,6 +30,8 @@ const Course = () => {
     }
     fetchData();
   }, []);
+
+  
 
   function handleSearchChange(e) {
     const value = e.target.value.toLowerCase();
@@ -32,6 +45,10 @@ const Course = () => {
 
  function handlebtn() {
     navigate('/course/add-course');
+  }
+
+  if (checkingAccess) {
+    return null; // or a loader
   }
 
   return (

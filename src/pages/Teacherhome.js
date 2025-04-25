@@ -1,14 +1,45 @@
-import React from "react";
-import { useLocation } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import {useNavigate } from "react-router-dom";
 import './Home.css'
 
 const Teacherhome=()=>{
-    const location =useLocation()
-    const teacher= location.state
+  const navigate =useNavigate()
+  const [teacher, setTeacher] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+      async function getteacherfromlocal(){
+        const storedteacher =  await JSON.parse(localStorage.getItem("teacher"));
+        if (storedteacher) {
+          setTeacher(storedteacher);
+        }
+        setLoading(false);
+      }
+      getteacherfromlocal()
+   
+    }, []);
+
+    useEffect(() => {
+          if (!loading && !teacher) {
+            navigate("/login");
+          }
+        }, [loading, teacher, navigate]);
+    
+      function handlelogbtn(){
+        localStorage.removeItem("teacher");
+        navigate('/login',{replace:true});
+      }
+      if (loading || !teacher) {
+        return null; 
+      }
+
    return(
     <div className="profile-container">
     <nav className="navbar">
       <h2>Teacher Profile</h2>
+      <button className= "signup-btn" onClick={handlelogbtn}>
+            logout
+      </button>
     </nav>
 
     <div className="card-container">

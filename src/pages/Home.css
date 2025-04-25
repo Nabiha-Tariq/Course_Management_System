@@ -34,7 +34,7 @@
   }
   
   .personal-card h3,
-  .academic-card h3 {
+  .academic-card h3,.button-card h3 {
     color: #9c27b0;
     margin-bottom: 1rem;
   }

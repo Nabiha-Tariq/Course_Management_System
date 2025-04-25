@@ -7,8 +7,20 @@ const Teacher = () => {
   const [teacherData ,setteacherData]=useState();
   const [filteredData, setFilteredData] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const [checkingAccess, setCheckingAccess] = useState(true);
+
 
   const navigate =useNavigate()
+
+  useEffect(() => {
+      const admin = localStorage.getItem("admin");
+      if (!admin) {
+        alert("You can't access this page")
+        navigate('/login');
+      }else {
+        setCheckingAccess(false);
+      }
+    }, [navigate]);
 
   useEffect(() => {
     async function fetchData() {
@@ -35,6 +47,10 @@ const Teacher = () => {
       teacher.lastName.toLowerCase().includes(value)
     );
     setFilteredData(filtered);
+  }
+
+  if (checkingAccess) {
+    return null; // or a loader
   }
 
   return (

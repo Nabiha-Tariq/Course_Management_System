@@ -4,28 +4,28 @@ import email_icon from '../assets/Email-icon.png';
 import password_icon from '../assets/Password-icon.png';
 import '../pages/loginsignup.css';
 import { useNavigate } from "react-router-dom";
-import { studentApi } from '../service/studentApi';
+import { adminApi } from '../service/adminApi';
  
-const Studentlogin = () => {
+const Adminlogin = () => {
   const navigate =useNavigate()
-  const [loginStudent , setLoginStudent]= useState({
+  const [loginAdmin , setLoginAdmin]= useState({
     name: '',
     email: '',
     password:'',
 })
-  const [student, setStudent] = useState()
+  const [admin, setAdmin] = useState()
   useEffect(()=>{
-    async function getstudent(){
-        const data = await studentApi();
+    async function getadmin(){
+        const data = await adminApi();
         const dataArray = Array.isArray(data) ? data : [data];
-        setStudent(dataArray);  
+        setAdmin(dataArray);  
     }    
-    getstudent()
+    getadmin()
   },[])
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setLoginStudent({...loginStudent,[name]:value})
+    setLoginAdmin({...loginAdmin,[name]:value})
   };
    
 
@@ -34,18 +34,18 @@ const Studentlogin = () => {
   }
   
   function handleLoginbtn() {
-    if (student && loginStudent) {
-      const matchedStudent = student.find((std) => 
-        std.email === loginStudent.email && std.password === loginStudent.password
+    if (admin && loginAdmin) {
+      const matchedAdmin = admin.find((admn) => 
+        admn.email === loginAdmin.email && admn.password === loginAdmin.password
       );
   
-      if (matchedStudent) {
-        if (matchedStudent.status !== "active") {
-          alert("Student is not active");
+      if (matchedAdmin) {
+        if (matchedAdmin.status !== "active") {
+          alert("Admin is not active");
           return;
         }
-        localStorage.setItem("student", JSON.stringify(matchedStudent))
-        navigate('/studenthome');
+        localStorage.setItem("admin", JSON.stringify(matchedAdmin))
+        navigate('/adminhome');
       } else {
         alert("Invalid email or password");
       }
@@ -56,7 +56,7 @@ const Studentlogin = () => {
     <div className="container">
       <div className="signin-box">
         <div className="header">
-          <div className="text">Student Login</div>
+          <div className="text">Admin Login</div>
           <div className="underline"></div>
         </div>
 
@@ -67,7 +67,7 @@ const Studentlogin = () => {
               type="text" 
               placeholder="Name" 
               name="name" 
-              value={loginStudent.name}
+              value={loginAdmin.name}
               onChange={handleChange}
               required/>
           </div>
@@ -77,7 +77,7 @@ const Studentlogin = () => {
                 type="email" 
                 placeholder="Email" 
                 name="email"
-                value={loginStudent.email}
+                value={loginAdmin.email}
                 onChange={handleChange} 
                 required/>
           </div>
@@ -87,7 +87,7 @@ const Studentlogin = () => {
               type="password" 
               placeholder="Password" 
               name = "password"
-              value={loginStudent.password}
+              value={loginAdmin.password}
               onChange={handleChange}
               required/>
           </div>
@@ -106,4 +106,4 @@ const Studentlogin = () => {
   );
 };
 
-export default Studentlogin;
+export default Adminlogin;

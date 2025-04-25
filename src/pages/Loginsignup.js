@@ -5,13 +5,45 @@ import { useNavigate } from "react-router-dom";
 const Loginsignup = () => {
    const navigate = useNavigate()
 
-   function handlebtn(){
-    navigate('/login/studentlogin')
+   function getLoggedInUserKey() {
+    const roles = ["student", "teacher", "admin"];
+    for (let role of roles) {
+      if (localStorage.getItem(role)) {
+        return role;
+      }
+    }
+    return null;
   }
 
-  function handleteacherbtn(){
-    navigate('/login/teacherlogin')
+  function handlebtn() {
+    const role = getLoggedInUserKey();
+    if (role) {
+      alert(`Logout the ${role} page`)
+      navigate(`/${role}home`);
+    } else {
+      navigate('/login/studentlogin');
+    }
   }
+
+function handleteacherbtn() {
+  const role = getLoggedInUserKey();
+  if (role) {
+    alert(`Logout the ${role} page`)
+    navigate(`/${role}home`);
+  } else {
+    navigate('/login/teacherlogin');
+  }
+}
+
+function handleAdminbtn() {
+  const role = getLoggedInUserKey();
+  if (role) {
+    alert(`Logout the ${role} page`)
+    navigate(`/${role}home`);
+  } else {
+    navigate('/login/adminlogin');
+  }
+}
   return (
     <div className="container">
       <div className="signin-box">
@@ -27,6 +59,12 @@ const Loginsignup = () => {
           <button className= "signup-btn" onClick={handleteacherbtn}>
            Teacher Login
           </button>
+
+          <button className= "signup-btn" onClick={handleAdminbtn}>
+           Admin Login
+          </button>
+
+
         </div>
       </div>
     </div>

@@ -40,4 +40,13 @@ router.post('/createAdmin',[
   }
   });
 
+  router.get('/createAdmin', async (req, res) => {
+    try {
+      const admin = await Admin.find();
+      res.json(admin);
+    } catch (err) {
+      res.status(500).json({ error: 'Error fetching admin' });
+    }
+  });
+
   module.exports = router

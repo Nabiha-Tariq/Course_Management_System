@@ -21,6 +21,9 @@ import Studentlogin from './components/Studentlogin';
 import Teacherlogin from './components/Teacherlogin';
 import Studenthome from './pages/Studenthome';
 import Teacherhome from './pages/Teacherhome';
+import Adminlogin from './components/Adminlogin';
+import AdminHome from './pages/AdminHome';
+import Protectedroute from './Protectedroutes';
 
 
 function App() {
@@ -30,28 +33,107 @@ function App() {
         <Route path="/login" element={<Loginsignup/>}/>
         <Route path="/login/studentlogin" element={<Studentlogin/>}/>
         <Route path="/login/teacherlogin" element={<Teacherlogin/>}/>
+        <Route path="/login/adminlogin" element={<Adminlogin/>}/>
         
-        <Route path="/studenthome" element={<Studenthome/>}/>
-        <Route path="/teacherhome" element={<Teacherhome/>}/>
+        <Route path="/studenthome" element=
+            {<Protectedroute allowedRoles={['student']}>
+                <Studenthome/>
+            </Protectedroute>}
+        />
+        <Route path="/teacherhome" element=
+            {<Protectedroute allowedRoles={['teacher']}>
+                <Teacherhome/>
+            </Protectedroute> }
+        />
+        <Route path="/adminhome" element=
+            {<Protectedroute allowedRoles={["admin"]}>
+                <AdminHome/>
+            </Protectedroute>}
+        />
+
+
+        <Route path="/student" element={
+          <Protectedroute allowedRoles={["admin"]}>
+            <Student />
+          </Protectedroute>
+        }/>
+        <Route path="/student/add-student" element={
+            <Protectedroute allowedRoles={["admin"]}>
+                <AddStudent/>
+            </Protectedroute>
+        }/>
+
+        <Route path="/student/view-student/:studentid" element={
+            <Protectedroute allowedRoles={["admin"]}>
+                <ViewStudent/>
+            </Protectedroute>}
+        />
+        <Route path="/student/edit-student/:studentid"  element=
+            {<Protectedroute allowedRoles={['admin']}>
+                <EditStudent/>
+            </Protectedroute>}
+        />
+        <Route path="/student/delete-student/:studentid"  element=
+            {<Protectedroute allowedRoles={['admin']}>
+                <DeleteStudent/>
+            </Protectedroute> }
+        />
+
+
+
+        <Route path="/teacher"  element=
+            {<Protectedroute allowedRoles={["admin"]}>
+                <Teacher/>
+            </Protectedroute> }
+        />
+        <Route path="/teacher/add-teacher"  element=
+            {<Protectedroute allowedRoles={['admin']}>
+                <AddTeacher/>
+            </Protectedroute>}
+        />
+        <Route path="/teacher/view-teacher/:teacherid"  element=
+            {<Protectedroute allowedRoles={['admin']}>
+                <ViewTeacher/>
+            </Protectedroute>  }
+        />
+        <Route path="/teacher/edit-teacher/:teacherid" element=
+            {<Protectedroute allowedRoles={['admin']}>
+                <EditTeacher/>
+            </Protectedroute> }
+        />
+         <Route  path="/teacher/delete-teacher/:teacherid" element=
+            {<Protectedroute allowedRoles={['admin']}>
+                <DeleteTeacher/>
+            </Protectedroute> }
+        />
+
+
+        <Route path="/course"  element=
+            {<Protectedroute allowedRoles={['admin']}>
+                <Course/>
+            </Protectedroute>}
+        />
+        <Route path="/course/add-course"  element=
+            {<Protectedroute allowedRoles={['admin']}>
+                <AddCourse/>
+            </Protectedroute> }
+        />
+        <Route path="/course/view-course/:courseid"  element=
+            {<Protectedroute allowedRoles={['admin']}>
+                <ViewCourse/>
+            </Protectedroute> }
+        />
+        <Route path="/course/edit-course/:courseid"  element=
+            {<Protectedroute allowedRoles={['admin']}>
+                <EditCourse/>
+            </Protectedroute>}
+        />
+        <Route path="/course/delete-course/:courseid"  element=
+            {<Protectedroute allowedRoles={['admin']}>
+                <DeleteCourse/>
+            </Protectedroute>}
+        />
         
-
-        <Route path="/student" element={<Student />} />
-        <Route path="/student/add-student" element={<AddStudent/>}/>
-        <Route path="/student/view-student/:studentid" element={<ViewStudent/>}/>
-        <Route path="/student/edit-student/:studentid" element={<EditStudent/>}/>
-        <Route path="/student/delete-student/:studentid" element={<DeleteStudent/>}/>
-
-        <Route path="/teacher" element={<Teacher/>} />
-        <Route path="/teacher/add-teacher" element={<AddTeacher/>}/>
-        <Route path="/teacher/view-teacher/:teacherid" element={<ViewTeacher/>}/>
-        <Route path="/teacher/edit-teacher/:teacherid" element={<EditTeacher/>}/>
-        <Route path="/teacher/delete-teacher/:teacherid" element={<DeleteTeacher/>}/>
-
-        <Route path='/course' element={<Course/>}/>
-        <Route path="/course/add-course" element={<AddCourse/>}/>
-        <Route path="/course/view-course/:courseid" element={<ViewCourse/>}/>
-        <Route path="/course/edit-course/:courseid" element={<EditCourse/>}/>
-        <Route path="/course/delete-course/:courseid" element={<DeleteCourse/>}/>
       </Routes>
     </Router>
    

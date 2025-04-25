@@ -44,7 +44,8 @@ const Teacherlogin = () => {
           alert("Teacher is not active");
           return;
         }
-        navigate('/teacherhome',{state:matchedTeacher});
+        localStorage.setItem("teacher", JSON.stringify(matchedTeacher))
+        navigate('/teacherhome');
       } else {
         alert("Invalid email or password");
       }
