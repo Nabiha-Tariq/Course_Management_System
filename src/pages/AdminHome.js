@@ -51,6 +51,16 @@ const AdminHome=()=>{
       navigate('/login')
     }
   }
+
+  function handlecoursPage(){
+    if(localStorage.getItem('admin')){
+      navigate('/course')
+    }
+    else{
+      alert("You can't access this page")
+      navigate('/login')
+    }
+  }
   
    return(
     <div className="profile-container">
@@ -77,6 +87,9 @@ const AdminHome=()=>{
         </button>
         <button className= "signup-btn" onClick={handleteaherPage}>
             Teacher Information
+        </button>
+        <button className= "signup-btn" onClick={handlecoursPage}>
+            Course Information
         </button>
       </div>
 
