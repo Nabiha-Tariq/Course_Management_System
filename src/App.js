@@ -25,6 +25,10 @@ import Adminlogin from './components/Adminlogin';
 import AdminHome from './pages/AdminHome';
 import Protectedroute from './Protectedroutes';
 import CourseRegister from './pages/CourseRegister';
+import StudentAttendence from './pages/StudentAttendence';
+import StudentMarks from './pages/StudentMarks';
+import TeacherAttendence from './pages/TeacherAttendence';
+
 
 
 function App() {
@@ -35,6 +39,24 @@ function App() {
         <Route path="/login/studentlogin" element={<Studentlogin/>}/>
         <Route path="/login/teacherlogin" element={<Teacherlogin/>}/>
         <Route path="/login/adminlogin" element={<Adminlogin/>}/>
+
+        <Route path="/marks" element=
+            {<Protectedroute allowedRoles={['student']}>
+                <StudentMarks/>
+            </Protectedroute>}
+        />
+
+        <Route path="/attendence" element=
+            {<Protectedroute allowedRoles={['student']}>
+                <StudentAttendence/>
+            </Protectedroute>}
+        />
+
+        <Route path="/teacherAttendence" element=
+            {<Protectedroute allowedRoles={['teacher']}>
+                <TeacherAttendence/>
+            </Protectedroute>}
+        />
 
         <Route path="/register" element=
             {<Protectedroute allowedRoles={['student']}>

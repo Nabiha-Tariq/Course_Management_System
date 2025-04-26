@@ -52,6 +52,14 @@ const Studenthome = () => {
     navigate('/register');
   }
 
+  function handeAttendeceBtn() {
+    navigate('/attendence');
+  }
+
+  function handeMarkseBtn() {
+    navigate('/marks');
+  }
+
   if (loading || !student) {
     return null; // you can show a spinner instead if you want
   }
@@ -67,8 +75,11 @@ const Studenthome = () => {
            <button className="register-btn" onClick={handleRegister}>
              Register
            </button>
-           <button className="attendence-btn" >
+           <button className="attendence-btn" onClick={handeAttendeceBtn} >
              Attendence
+           </button>
+           <button className="attendence-btn" onClick={handeMarkseBtn} >
+             Marks
            </button>
         </div>
       </nav>

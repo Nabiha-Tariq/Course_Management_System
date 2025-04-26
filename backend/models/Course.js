@@ -1,3 +1,4 @@
+const { type } = require('@testing-library/user-event/dist/type');
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
@@ -13,6 +14,10 @@ const courseSchema = new Schema({
   },
   creditHours:{
     type : Number,
+    required: true
+  },
+  teacherId:{
+    type: String,
     required: true
   },
   status:{

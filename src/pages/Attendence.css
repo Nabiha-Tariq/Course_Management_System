@@ -1,0 +1,41 @@
+.course-list {
+    display: flex;
+    gap: 10px;
+    margin-left: auto;
+  }
+  
+  .course-btn {
+    background-color: #6a1b9a;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .course-btn:hover {
+    background-color:  #6a1b9a;
+  }
+  
+  .attendance-table-container {
+    margin-top: 20px;
+    padding: 20px;
+  }
+  
+  .attendance-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .attendance-table th,
+  .attendance-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+  }
+  
+  .attendance-table th {
+    background-color:  #6a1b9a;
+    color: white;
+  }
+  

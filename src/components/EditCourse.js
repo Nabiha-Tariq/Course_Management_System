@@ -23,6 +23,7 @@ const EditCourse = () => {
         courseId: dataObj.courseId,
         courseName: dataObj.courseName,
         creditHours: dataObj.creditHours,
+        teacherId:dataObj.teacherId,
         status: dataObj.status
       });
     }

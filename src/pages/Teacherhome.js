@@ -25,10 +25,20 @@ const Teacherhome=()=>{
           }
         }, [loading, teacher, navigate]);
     
-      function handlelogbtn(){
+      function handleLogout(){
         localStorage.removeItem("teacher");
         navigate('/login',{replace:true});
       }
+
+      function handleRegister() {
+        navigate('/register');
+      }
+    
+      function handeAttendeceBtn() {
+        navigate('/teacherattendence');
+      }
+    
+
       if (loading || !teacher) {
         return null; 
       }
@@ -37,9 +47,17 @@ const Teacherhome=()=>{
     <div className="profile-container">
     <nav className="navbar">
       <h2>Teacher Profile</h2>
-      <button className= "signup-btn" onClick={handlelogbtn}>
-            logout
-      </button>
+      <div className="button-group">
+           <button className="logout-btn" onClick={handleLogout}>
+             Logout
+           </button>
+           <button className="attendence-btn" onClick={handeAttendeceBtn} >
+             Attendence
+           </button>
+           <button className="attendence-btn" >
+             Marks
+           </button>
+      </div>
     </nav>
 
     <div className="card-container">

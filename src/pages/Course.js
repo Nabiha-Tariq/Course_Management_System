@@ -93,6 +93,9 @@ const Course = () => {
               ))}
           </tbody>
         </table>
+        <button className="add-btn" onClick={()=>navigate('/adminhome')}>
+          Back
+        </button>
       </div>
     </div>
   );

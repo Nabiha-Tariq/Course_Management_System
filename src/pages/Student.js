@@ -118,6 +118,9 @@ const Student = () => {
             })}
           </tbody>
         </table>
+        <button className="add-btn" onClick={()=>navigate('/studenthome')}>
+          Back
+        </button>
       </div>
     </div>
   );

@@ -1,15 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import {teacherApi} from '../service/TeacherApi'
 import './global.css';
 
 const AddCourse = () => {
-  const navigate= useNavigate()
+  const navigate = useNavigate();
+  
   const [newCourse, setCourse] = useState({
     courseId: '',
     courseName: '',
     creditHours: '',
-    status: ''
+    status: '',
+    teacherId: '',  // ✅ NEW field for teacher
   });
+
+  const [teachers, setTeachers] = useState([]); 
+  console.log("teacherId",teachers)
+  // ✅ Fetch all teachers on mount
+  useEffect(() => {
+    async function fetchTeachers() {
+      try {
+        const data = await teacherApi();
+        const dataArray = Array.isArray(data) ? data : [data];
+        setTeachers(dataArray);  
+      } catch (err) {
+        console.error('Error fetching teachers:', err);
+      }
+    }
+    fetchTeachers();
+  }, []);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -31,14 +50,14 @@ const AddCourse = () => {
       console.log('Course saved:', data);
 
       alert('Course added successfully!');
-
-        // ✅ Redirect to student page
       navigate('/course');
 
-      // Clear form
       setCourse({
         courseId: '',
         courseName: '',
+        creditHours: '',
+        status: '',
+        teacherId: ''
       });
     } catch (err) {
       console.error('Error saving course:', err);
@@ -48,21 +67,21 @@ const AddCourse = () => {
   return (
     <div className='form'>
       <div className='add-box'>
-        <h2 className='heading'>Add a new Course</h2>
+        <h2 className='heading'>Add a New Course</h2>
         <form onSubmit={handleSubmit}>
-          <label>CourseId:</label>
+          
+          <label>Course ID:</label>
           <input 
             type="text" 
             name="courseId"
-            placeholder="ID" 
+            placeholder="Course ID" 
             value={newCourse.courseId}
             onChange={handleChange}
             required 
           />
-          {newCourse.courseId.length ===0 && <span className="errorMsg">
-            Please enter Course Id</span>}  
+          {newCourse.courseId.length === 0 && <span className="errorMsg">Please enter Course ID</span>}
 
-          <label>CourseName:</label>
+          <label>Course Name:</label>
           <input 
             type="text" 
             name="courseName"
@@ -71,9 +90,24 @@ const AddCourse = () => {
             onChange={handleChange}
             required 
           />
-          {newCourse.courseName.length === 0 && <span className="errorMsg">
-            Please enter Course name</span>} 
+          {newCourse.courseName.length === 0 && <span className="errorMsg">Please enter Course Name</span>}
 
+          {/* ✅ Teacher selection dropdown */}
+          <label>Assign Teacher:</label>
+          <select 
+            name="teacherId" 
+            value={newCourse._id}
+            onChange={handleChange}
+            required
+          >
+            <option value="">Select a Teacher</option>
+            {teachers.map((teacher) => (
+              <option key={teacher._id} value={teacher._id}>
+                {teacher.firstName} {teacher.lastName}
+              </option>
+            ))}
+          </select>
+          {newCourse.teacherId.length === 0 && <span className="errorMsg">Please select a Teacher</span>}
 
           <button type="submit">Save</button>
         </form>

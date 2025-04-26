@@ -26,7 +26,8 @@ router.post('/createCourse',[
         courseId: req.body.courseId,
         courseName: req.body.courseName,
         creditHours: 3,
-        status: "inactive"
+        status: "inactive",
+        teacherId:req.body.teacherId
     })
 
     res.json({"message":"save successfully"})
@@ -60,6 +61,7 @@ router.post('/createCourse',[
     body('courseId', 'Enter a valid Id').isLength({ min: 3 }),
     body('courseName', 'Enter a valid  name').isLength({ min: 3 }),
     body('creditHours', 'Enter a valid crerdithours').isNumeric(),
+    body('teacherId', 'Enter a valid teacherId').isLength({ min: 3 }),
     body('status', 'Status is required').notEmpty()
   ], async (req, res) => {
     const errors = validationResult(req);
@@ -68,7 +70,7 @@ router.post('/createCourse',[
     }
   
     const { courseid } = req.params;
-    const { courseId, courseName, creditHours, status } = req.body;
+    const { courseId, courseName, creditHours,teacherId, status } = req.body;
   
     try {
       const course = await Course.findOne({ courseId: req.params.courseid });
@@ -80,6 +82,7 @@ router.post('/createCourse',[
       course.courseId = courseId;
       course.courseName = courseName;
       course.creditHours = creditHours;
+      course.teacherId=teacherId;
       course.status = status;
   
       const updatedCourse = await course.save();

@@ -99,7 +99,9 @@ const Teacher = () => {
             }
             </tbody>
         </table>   
-
+        <button className="add-btn" onClick={()=>navigate('/teacherhome')}>
+          Back
+        </button>
         
       </div>
     </div>
