@@ -28,6 +28,7 @@ import CourseRegister from './pages/CourseRegister';
 import StudentAttendence from './pages/StudentAttendence';
 import StudentMarks from './pages/StudentMarks';
 import TeacherAttendence from './pages/TeacherAttendence';
+import TeacherMarks from './pages/TeacherMarks';
 
 
 
@@ -43,6 +44,12 @@ function App() {
         <Route path="/marks" element=
             {<Protectedroute allowedRoles={['student']}>
                 <StudentMarks/>
+            </Protectedroute>}
+        />
+
+        <Route path="/teachermarks" element=
+            {<Protectedroute allowedRoles={['teacher']}>
+                <TeacherMarks/>
             </Protectedroute>}
         />
 

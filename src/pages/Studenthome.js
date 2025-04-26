@@ -10,7 +10,6 @@ const Studenthome = () => {
   const [selectedCourses, setSelectedCourses] = useState([]);
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(true);
-
   useEffect(() => {
     async function fetchStudentAndCourses() {
       const storedStudent = JSON.parse(localStorage.getItem("student"));
@@ -35,6 +34,8 @@ const Studenthome = () => {
     }
     fetchCourses();
   }, []);
+
+  console.log("selected",selectedCourses)
 
   useEffect(() => {
     if (!loading && !student) {
@@ -63,7 +64,6 @@ const Studenthome = () => {
   if (loading || !student) {
     return null; // you can show a spinner instead if you want
   }
-
   return (
     <div className="profile-container">
       <nav className="navbar">
@@ -94,27 +94,26 @@ const Studenthome = () => {
         </div>
 
         {/* Registered Courses */}
-        {selectedCourses.length > 0 ? (
-          <div className="card academic-card">
-            <h3>Academic Information</h3>
-            {selectedCourses.map((reg, index) => {
-              const courseDetails = courses.find(c => c.courseId === reg.courseId);
-              return courseDetails ? (
-                <div key={index} style={{ marginBottom: '10px' }}>
-                  <p><strong>Course ID:</strong> {courseDetails.courseId}</p>
-                  <p><strong>Course Name:</strong> {courseDetails.courseName}</p>
-                  <p><strong>Credit Hours:</strong> {courseDetails.creditHours}</p>
-                  <p><strong>Status:</strong> {courseDetails.status}</p>
-                  <hr />
-                </div>
-              ) : null;
-            })}
-          </div>
-        ) : (
-          <div className="card academic-card">
-            <h3>No courses registered yet.</h3>
-          </div>
-        )}
+        <div className="card academic-card">
+        <h3>Acdemic Information</h3>
+            {selectedCourses.length > 0 ? (
+              
+              selectedCourses.map((reg, index) => {
+                return (
+                  <div key={index}>
+                    <p><strong>Course ID:</strong> {reg.courseId}</p>
+                    <p><strong>Course Name:</strong> {reg.courseName}</p>
+                    <p><strong>Credit Hours:</strong> {reg.creditHours}</p>
+                    <p><strong>Status:</strong> {reg.status}</p>
+                    <hr />
+                  </div>
+                );
+              })
+              
+            ) : (
+              <p>No courses registered.</p>
+            )}
+        </div>
       </div>
     </div>
   );

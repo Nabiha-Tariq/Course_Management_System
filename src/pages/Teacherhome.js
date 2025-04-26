@@ -29,11 +29,12 @@ const Teacherhome=()=>{
         localStorage.removeItem("teacher");
         navigate('/login',{replace:true});
       }
-
-      function handleRegister() {
-        navigate('/register');
-      }
     
+      function handlemarkBtn(){
+        navigate('/teachermarks')
+
+      }
+
       function handeAttendeceBtn() {
         navigate('/teacherattendence');
       }
@@ -54,7 +55,7 @@ const Teacherhome=()=>{
            <button className="attendence-btn" onClick={handeAttendeceBtn} >
              Attendence
            </button>
-           <button className="attendence-btn" >
+           <button className="attendence-btn" onClick={handlemarkBtn}>
              Marks
            </button>
       </div>

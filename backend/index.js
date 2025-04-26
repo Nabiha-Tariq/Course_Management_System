@@ -16,6 +16,7 @@ const Adminroutes = require('./routes/Admin');
 const Courseroutes = require('./routes/Course');
 const Course_Register =require('./routes/Course_Register')
 const Attendance=require('./routes/Attendence')
+const Marks =require('./routes/Marks')
 
 
 app.use('/api/Student',Studentroutes)
@@ -24,6 +25,7 @@ app.use('/api/Admin',Adminroutes)
 app.use('/api/Course',Courseroutes)
 app.use('/api/Course_Register',Course_Register)
 app.use('/api/attendence',Attendance)
+app.use('/api/marks',Marks)
 
 
 app.listen(port, () => {
