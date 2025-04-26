@@ -24,6 +24,7 @@ import Teacherhome from './pages/Teacherhome';
 import Adminlogin from './components/Adminlogin';
 import AdminHome from './pages/AdminHome';
 import Protectedroute from './Protectedroutes';
+import CourseRegister from './pages/CourseRegister';
 
 
 function App() {
@@ -34,6 +35,12 @@ function App() {
         <Route path="/login/studentlogin" element={<Studentlogin/>}/>
         <Route path="/login/teacherlogin" element={<Teacherlogin/>}/>
         <Route path="/login/adminlogin" element={<Adminlogin/>}/>
+
+        <Route path="/register" element=
+            {<Protectedroute allowedRoles={['student']}>
+                <CourseRegister/>
+            </Protectedroute>}
+        />
         
         <Route path="/studenthome" element=
             {<Protectedroute allowedRoles={['student']}>

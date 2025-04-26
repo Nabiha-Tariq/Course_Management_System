@@ -1,21 +1,39 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { courseApi } from '../service/courseApi';
+import { courseRegApi } from '../service/courseRegApi';
 import './Home.css';
-import { useNavigate } from "react-router-dom";
 
 const Studenthome = () => {
   const navigate = useNavigate();
   const [student, setStudent] = useState(null);
+  const [selectedCourses, setSelectedCourses] = useState([]);
+  const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    async function getstudentfromlocal(){
-    const storedStudent =await JSON.parse(localStorage.getItem("student"));
-    if (storedStudent) {
-      setStudent(storedStudent);
+    async function fetchStudentAndCourses() {
+      const storedStudent = JSON.parse(localStorage.getItem("student"));
+      if (storedStudent) {
+        setStudent(storedStudent);
+
+        const registrations = await courseRegApi();
+        const studentRegistrations = registrations.filter(reg => reg.studentId === storedStudent._id);
+        setSelectedCourses(studentRegistrations);
+      }
+      setLoading(false);
     }
-    setLoading(false);
-    } 
-    getstudentfromlocal()
+    fetchStudentAndCourses();
+  }, []);
+
+  console.log("selecetedcourse",selectedCourses)
+
+  useEffect(() => {
+    async function fetchCourses() {
+      const courseList = await courseApi();
+      setCourses(Array.isArray(courseList) ? courseList : [courseList]);
+    }
+    fetchCourses();
   }, []);
 
   useEffect(() => {
@@ -24,31 +42,68 @@ const Studenthome = () => {
     }
   }, [loading, student, navigate]);
 
-  function handlelogbtn() {
+  function handleLogout() {
     localStorage.removeItem("student");
-    navigate("/login",{replace:true});
+    localStorage.removeItem("selectedCourses");
+    navigate("/login", { replace: true });
+  }
+
+  function handleRegister() {
+    navigate('/register');
   }
 
   if (loading || !student) {
-    return null; 
+    return null; // you can show a spinner instead if you want
   }
 
   return (
     <div className="profile-container">
       <nav className="navbar">
         <h2>Student Profile</h2>
-        <button className="signup-btn" onClick={handlelogbtn}>
-          Logout
-        </button>
+        <div className="button-group">
+           <button className="logout-btn" onClick={handleLogout}>
+             Logout
+           </button>
+           <button className="register-btn" onClick={handleRegister}>
+             Register
+           </button>
+           <button className="attendence-btn" >
+             Attendence
+           </button>
+        </div>
       </nav>
+
       <div className="card-container">
         <div className="card personal-card">
           <h3>Personal Information</h3>
-          <p><strong>FirstName:</strong> {student.firstName}</p>
-          <p><strong>LastName:</strong> {student.lastName}</p>
+          <p><strong>First Name:</strong> {student.firstName}</p>
+          <p><strong>Last Name:</strong> {student.lastName}</p>
           <p><strong>Email:</strong> {student.email}</p>
           <p><strong>Status:</strong> {student.status}</p>
         </div>
+
+        {/* Registered Courses */}
+        {selectedCourses.length > 0 ? (
+          <div className="card academic-card">
+            <h3>Academic Information</h3>
+            {selectedCourses.map((reg, index) => {
+              const courseDetails = courses.find(c => c.courseId === reg.courseId);
+              return courseDetails ? (
+                <div key={index} style={{ marginBottom: '10px' }}>
+                  <p><strong>Course ID:</strong> {courseDetails.courseId}</p>
+                  <p><strong>Course Name:</strong> {courseDetails.courseName}</p>
+                  <p><strong>Credit Hours:</strong> {courseDetails.creditHours}</p>
+                  <p><strong>Status:</strong> {courseDetails.status}</p>
+                  <hr />
+                </div>
+              ) : null;
+            })}
+          </div>
+        ) : (
+          <div className="card academic-card">
+            <h3>No courses registered yet.</h3>
+          </div>
+        )}
       </div>
     </div>
   );
