@@ -16,7 +16,7 @@ A full-featured Course Management System built using the **MERN stack (MongoDB, 
 ### Admin Features
 - Manage users: students, teachers, courses
 
-## 🧰 Tech Stack
+## Tech Stack
 
 ### Frontend:
 - **React.js** with Hooks and Router
@@ -55,6 +55,12 @@ Make sure MongoDB is running locally or provide your Atlas URI.
 ## Start the app
 - npm run dev (cd backend)
 - npm start 
+
+### Future Work
+- Implement push notifications to keep users informed about important updates such as deadlines and announcements.
+- Apply JWT-based authentication to enhance security and manage user sessions effectively.
+- Add functionality to track course completion status for students.
+- Generate certificates upon successful completion of a course.
 
 
 # Course_Management_System
