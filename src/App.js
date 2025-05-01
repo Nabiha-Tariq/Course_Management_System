@@ -29,6 +29,7 @@ import StudentAttendence from './pages/StudentAttendence';
 import StudentMarks from './pages/StudentMarks';
 import TeacherAttendence from './pages/TeacherAttendence';
 import TeacherMarks from './pages/TeacherMarks';
+import Home from './Home';
 
 
 
@@ -36,6 +37,7 @@ function App() {
   return (
     <Router>
       <Routes>
+        <Route path="" element={<Home/>}/>
         <Route path="/login" element={<Loginsignup/>}/>
         <Route path="/login/studentlogin" element={<Studentlogin/>}/>
         <Route path="/login/teacherlogin" element={<Teacherlogin/>}/>
