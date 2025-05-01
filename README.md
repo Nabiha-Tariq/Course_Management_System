@@ -1,12 +1,20 @@
-# Getting Started with Create React App
+# Course Management System (MERN Stack)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A full-featured Course Management System built using the **MERN stack (MongoDB, Express, React, Node.js)**. This application enables students, teachers, and administrators to manage courses, attendance, and upload marks.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+### Student Features
+- View enrolled courses and credit hours
+- See attendance records by course
+- Check marks
 
-### `npm start`
+### Teacher Features
+- Create and update course information
+- Upload attendance and marks
+
+### Admin Features
+- Manage users: students, teachers, courses
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
