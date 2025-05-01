@@ -56,7 +56,7 @@ Make sure MongoDB is running locally or provide your Atlas URI.
 - npm run dev (cd backend)
 - npm start 
 
-### Future Work
+# Future Work
 - Implement push notifications to keep users informed about important updates such as deadlines and announcements.
 - Apply JWT-based authentication to enhance security and manage user sessions effectively.
 - Add functionality to track course completion status for students.
