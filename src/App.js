@@ -35,7 +35,6 @@ import Home from './Home';
 
 function App() {
   return (
-    <Router>
       <Routes>
         <Route path="" element={<Home/>}/>
         <Route path="/login" element={<Loginsignup/>}/>
@@ -173,7 +172,6 @@ function App() {
         />
         
       </Routes>
-    </Router>
    
   );
 }

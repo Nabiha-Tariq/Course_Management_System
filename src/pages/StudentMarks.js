@@ -3,11 +3,13 @@ import { courseRegApi } from "../service/courseRegApi";
 import { marksApi } from "../service/marksApi";
 import './Attendence.css'; // (You can rename to Marks.css if you want)
 
+
 const StudentMarks = () => {
   const [courses, setCourses] = useState([]);
   const [student, setStudent] = useState(null);
   const [selectedCourseId, setSelectedCourseId] = useState(null);
   const [studentMarks, setStudentMarks] = useState([]);
+  
 
   useEffect(() => {
     async function fetchStudentAndCourses() {
@@ -35,6 +37,7 @@ const StudentMarks = () => {
   function handleCourseClick(courseId) {
     setSelectedCourseId(courseId);
   }
+  
 
   const filteredMarks = studentMarks.filter(record => record.courseId === selectedCourseId);
 

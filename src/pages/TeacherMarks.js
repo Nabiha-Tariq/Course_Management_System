@@ -70,6 +70,7 @@ const TeacherMarks = () => {
 
       if (res.ok) {
         alert('Marks uploaded successfully!');
+        
       } else {
         const errorData = await res.json();
         alert('Error uploading marks: ' + errorData.error);
